@@ -337,12 +337,30 @@
 
 <script>
   // Initialize Supabase with your connected credentials
-    const SUPABASE_URL = 'https://bllgbsbjcffopihbysks.supabase.co';
+  const SUPABASE_URL = 'https://bllgbsbjcffopihbysks.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_-8p0ftL8fLoL89PrEl6wuQ_3-t3dYp9';
   
   const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   console.log("Supabase connected successfully!");
+
+  // Test function to save a user to your database
+  async function testSignup() {
+    const { data, error } = await _supabase
+      .from('users')
+      .insert([
+        { Email: 'testworker@gmail.com', Password: 'mypassword123', Status: 'pending' }
+      ]);
+
+    if (error) {
+      console.error('Error saving user:', error);
+    } else {
+      console.log('User saved successfully!', data);
+    }
+  }
+
+  // Run the test
+  testSignup();
 </script>
 
 </body>
